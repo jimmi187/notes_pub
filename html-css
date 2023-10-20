@@ -1,0 +1,32 @@
+css
+
+
+
+
+pseudo selectors:
+	span[class~="sr-only"] select any span includes sr-only
+    clip: rect(50px,50px,50px,50px); forms a rectangle around element
+    clip-path:inset(59%); koliko posto kvadrata je ispinjeno
+    
+    :first-of-type pseudo-selector is used to target the first element that matches the selector. 
+    :last-of-type
+    .line:nth-of-type(2)
+    calc() function is a CSS function that allows you to calculate a value based on other values.  calc(1.25rem + 2px) 
+    
+    !important to prop to cant overwrite it 
+    
+    
+    span[class~="sr-only"] {  ====> to hide an element;
+      border: 0;  
+      clip: rect(1px, 1px, 1px, 1px);
+      clip-path: inset(50%);
+      height: 1px;
+      width: 1px;
+      overflow: hidden;
+      white-space: nowrap;
+      position:absolute;
+      padding: 0;
+      margin:-1px;
+      
+    }
+

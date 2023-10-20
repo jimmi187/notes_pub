@@ -1,0 +1,94 @@
+arch
+
+iwctl
+device list
+station wlan0 scan
+station wlan0 get-networks
+station wlan0 connect --net-ssid--
+
+
+pacman -Sy archinstall archlinux-keyring
+
+archinstall
+
+install with xorg only
+
+enble wifi 
+	nmcli d ---> show interfaces 
+	nmcli r wifi on 
+	nmcli d wifi list
+	nmcli d wifi connect --yourwifiname-- password --yourwifipasss--
+	
+	
+mkdir -p .local/src
+cd .local/src
+
+git clone https://github.com/Bugswriter/dwm.git
+git clone https://github.com/Bugswriter/dmenu.git
+git clone https://github.com/Bugswriter/st.git
+
+
+sudo make clean install 
+??????
+sudo pacman -S libxft
+sudo pacman -S libxinerama --> allows multiple display s 
+
+sudo make clean install  for all 3 repos 
+
+cd 
+
+cp /etc/X11/xinit/xinitrc ~/.xinitrc
+sudo pacman -S vim 
+
+vim .xinitrc --> replace last 6 line with -> exec dwm
+
+sudo pacman -S ttf-jetbrains-mono ttf-font-awesome 
+
+startx
+
+win ent = ter
+win + n(number) = wsn
+win + q = quit window 
+win + g = hidetop bar 
+w + shif + q quit dwm
+w j = left 
+w k = right 
+w h = resize left 
+w l = resize right 
+----> config.h
+
+xrandr ---> ? -> resulutin fix 
+
+xrandr --output dipsalyname --mode resoltuion 
+
+
+w space => dmenu
+
+sudo pacman -S xwallpaper ==> for wallpapers 
+
+sudo pacman -S zsh 
+
+sudo pacman -S xcompmgr ====> transparent terminal 
+
+setsid xcompmgr &  ----> set it run it background 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+	

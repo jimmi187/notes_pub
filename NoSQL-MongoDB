@@ -1,0 +1,13 @@
+
+					------------ MongoDB----------
+
+	------------ Basics ------------
+		- termology
+			-db = db
+			-table = collection
+			-row = document
+			-column = field
+			-table join = embeded document
+			-primary key = primary key
+			-aggregation = aggregation pipline
+			

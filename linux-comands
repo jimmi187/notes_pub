@@ -1,0 +1,177 @@
+
+
+
+WSL INSTALL COMMANDS
+
+	wsl --install -d ubuntu //  -d 4 dristros optional
+	wsl --list --online 	// to c optional distros  (wsl --update)
+	vs-code from win -> remote develpment plugin(with all features)
+ 
+ 
+ 
+USEFUL TOOLS
+	
+	---Tmux---
+		-	// to do 
+		
+	---Vim---
+		-  // to do
+	
+	---Nano---
+		- ctrl + w  // search-nano
+		- ctrl + End // jump to end of the file
+
+
+
+USEFUL COMMANDS
+
+	- sudo su - 			// enter root account 
+	- whoami    			// print currently log user 
+	- hostname  			// pring host name(name of the server)
+	- hostnamectl 			// pring more info of host 
+	- lsblk 				// list block devices
+	- htop					// monitor
+		-F3 to search process
+		-F9 on highlited process
+		-SIGTERM to nicely kill proccess (SIGKILL - be carefull with this)
+	- man <command> 		// see manual of command (q to exit )
+	- command & disown      // will run program in backgrund and allow usig same terminal
+	
+
+
+UBUNTU SERVER
+
+	---BasicSetup---
+		
+		-sudo apt install unattended-upgrades
+		-sudo apt install update-notifier-common
+		-cd /etc/apt/apt.conf.d/
+		-sudo nano 50unattended-upgrades
+			- (security, apps-security, infra-security) must be uncommented
+			- ctrl+w -> Automatic-Reboot uncomment line set to "true" 
+			- ctrl+w -> Automatic-Reboot-time uncomment line set to time u like
+		-sudo nano 20auto-upgrades
+			- check Update-Package-Lists is set to 1
+			- check Unattended-Upgrade is set to 1
+		-reboot
+		-sudo systemctl status <unattended-upgrades.service> //-> <this how chek any service>
+		-ip a // net status
+		-sudo nano /etc/netplan/00-installer-config.yaml // here u can change static ip adress and net config
+		-ssh...
+		-
+		
+		
+	---WEB_CONSOLE--- for Administration
+	
+		-sudo apt update
+		-sudo apt install cockpit
+		-sudo systemctl status cockpit.socket //check status
+		-sudo nano /etc/netplan/00-installer-config.yaml  // ispod "version" -> renderer: NetworkManager
+		-sudo netplan try -> yes or enter
+		-reboot
+		-go to yourServerLocalStaticIp:9090 
+		
+	
+
+	---USER_MANAGMENT---
+	
+		- sudo adduser <new user name> 			// this addsnew user 
+												(follow steps for addig pw 
+												and other info(can be skiped))
+		- sudo usermod -a -G sudo <usrname> // tis add admin priviges to selected user
+		- su - <username> 						// swich to other user
+		- exit 									// to swich back to original user
+		- compgen -u 							// list all accounts on system 
+		- sudo deluser <username>				// to delete user
+		- sudo passwd <user>					// change user pw
+		- sudo passwd root 						// enable root acc login
+		- sudo passwd -l root					// disable root acc login 
+		- sudo hostnamectl set-hostname <name>	// change host name (as server boots it maps hostname to ip)
+			- exec bash 						// confirms uperchange 
+		- sudo nano /etc/hosts 					// settings for hostname there u can 
+													change it to perviusly command
+		
+		
+		
+	---DRIVE_MANAGMENT---
+	
+		- lsblk      							// list block devices
+		- sudo wipefs -a /drive/path 			//-> lie /dev/sda delete current partrion signatire
+		- sudo gdisk /drive/path            	// -||-   create gpt partrion for storage disk
+			- n || ?(for help)					// n means new I guess
+			- 1 (partition number)
+			- 2xENTER to make one partition ELSE u can choose somthing else -> need more info(add here if u know)
+			- ENTER
+			- w  || ?(for help)              	// to write changes
+			- y 
+		- sudo gdisk -l /drive/path				// to list partitions
+		- sudo mkfs.ext4 /partition/path 		// expl: dev/sda1 this makes file system(ext4) on partition
+		- cd /mnt 								// START OF MOUNTING DRIVE
+		- sudo mkdir <drive_name>				// makeing mounting point 1. step 
+		- sudo chattr +i <mountig_point_drive> 	// making mountig point inmutable(so if drive not mount 	
+													forbid writing to system disk)
+		- sudo blkid 							// list drives so u can use UUID for mounting insted of 
+													name(expl:dev/sda1) in case of reassebeling and assebeling 
+													server partition may not be nemed the same
+		- copy UUID="somecode"					// from U to " including
+		- sudo nano /etc/fstab					// edit this file to automate mountig drive
+													go to last line and add followin: paste UUID="drive-unique-identifier"
+			- UUID="drive-unique-identifier" /mnt/<mount_point> ext4 defaults 0 2
+				// 0 2 for non system drives
+		- sudo mount -a 						// no errors its all good (mounts all listed in /etc/fstab)
+		- df -h <drive> 						// list drive info
+		
+		
+	
+	---PRIVILEGIES---
+		
+		- sudo chown -R <user> <directory_name>/  //make usr owner of direcory -R make it recursive
+		- sudo chmod -R 750 <directory_name>/	  //   "/" -> must include at the end  just frontslash
+		
+		--OCTAL_NOTATION--
+		 0 - no permision	\
+		 1 - execute		 \  others are combinations of these
+		 2 - write			 /	expl: 1+2+4 -> 7 read write execute
+		 4 - read			/
+		 
+		
+	
+	---FIREWALL---
+		
+		- sudo ufw status             	// get firewall status
+		- sudo ufw allow ssh 			// allow ssh (to not lock ur self out if u are remotly)
+		- sudo ufw enable 				// enable it
+		- sudo ufw deny ssh				// deny ssh 
+		- sudo uwf allow samba   		// samba 4 file share 
+		- sudo uwf disable 				// disable firewall 
+		
+		
+	
+	---NETSTATS---
+
+		- sudo apt install net-tools
+		- sudo netstat -tulpn
+			-t -> TCP connections
+			-u -> UDP connections
+			-l -> listening sockets
+			-p -> numerical addresses isted of trying to determinate host, port or user name 
+			-n -> PID(process identifier) & program name to which each socket belongs
+			
+		
+		
+	---GUI4SERVER---(no really need 4 this cuz of webconsole || only for remote gui from windows)
+		
+		-sudo apt install lxde-core lxappearance
+		-lightdm
+		-
+	
+	
+	
+	---TASKSEL---(usefull tool for installing ussual programs)
+	
+		- sudo apt update
+		- sudo apt install tasksel
+		- tasksel --list-tasks   			//list all tasks need more invetigation about this feature
+		
+
+	

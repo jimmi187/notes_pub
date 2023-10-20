@@ -1,0 +1,23 @@
+vite new tool for createing react app better than create-react-app
+    npm create vite@latest ./ -- --template react  ---> 
+
+install tailwindcss 
+    npm install -D tailwindcss
+    npx tailwindcss init        	
+
+packages to use in portfolio 
+    npm install 
+        --legacy-peer-deps for instaling some packages compatible with older versions of react 
+        @react-tree/fiber
+        @react-tree/drei   those 2 for 3d animations 
+        maath            for math functions to help with geomethery 
+        react-tilt  for cool animations when hovering over the cards 
+        react-vertical-timeline-component for timeline verical xd
+        @emailjs/browser
+        framer-motion
+        react-router-dom
+        \
+        
+run Vite with
+    npm run dev
+            

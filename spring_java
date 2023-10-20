@@ -1,0 +1,136 @@
+*********************************  SPRING BOOT ********************************
+
+
+https://www.udemy.com/course/spring-framework-5-beginner-to-guru/learn/lecture/10680150 
+https://github.com/spring-petclinic    // many diff version of petclinic
+
+
+section 3 -> 40. spring bean life cycle
+
+
+spring bean scope:
+	- Singleton - (default) Only one instance of the bean is created in the IoC container
+	- Prototype - A new instance is created each time the bean is requested. 
+	- Request - A single instance per http request. Only valid in the context of a web-aware Spring ApplicationContext.
+	- Session - A single instance per http session. Only valid in the context of a web-aware Spring ApplicationContext
+	
+owerride propperties from command line and from system variables
+	- use some idea edit run config 
+		-CML -> Program arguments -> --<envvariable=value> --<otherenvvariable=value>
+		-ENVvariable -> Enviroment variables -> if jimi.username=value than JIMI_USERNAME=value also 
+		-#this.is.some.property=${EVN_PROPERY} -> this is how to use system(ENVvariable) property in file 
+	CML will overwrithe ENVvariable
+	
+DevTools > project settings>build>compiler>build project automaticly
+		> project settings>advanced settings> allow auto-make
+		
+Cursor -> Insert on keyboiard
+		
+=============== JPA  =======================
+	-fetch type
+		-OneToMany -> lazy
+		-ManyToOne -> Eager
+		-ManyToMany -> Lazy
+		-OneToOne -> Eager
+	-cascade type == form parents obj to child obj
+		-PERSIST -> save operations will cascade to related entities
+		-MERGE -> realated entities asre merged when the owning entity is merged 
+		-REFRESH -> realated entities are refreshed when the owning ewntity is refreshed 
+		-REMOVE -> removes all realted enities when the owning entity is deleted 
+		-DETACH -> detaches all realted enitties if a manual detach occurs(from hibernate season)
+		-ALL -> applies all above cascade options
+		-by default, no operations are cascaded
+		
+============= Hibernate ddl-auto =======================
+	-none
+	-valid
+	-update
+	-create
+	-create-drop
+	
+===========Project Lombok =======================
+
+	- @Getter - Creates getter methods for all properties
+	- @Setter - Creates setter for all non-final properties
+	- @ToString
+		• Generates String of classname, and each field separated by commas
+		• Optional parameter to include field names
+		• Optional parameter to include call to the super toString method
+	- @EqualsAndHashCode
+		• Generates implementations of equals(Object other) and hashCode()
+		• By default will use all non-static, non-transient properties
+		• Can optionally exclude specific properties
+	- @NoArgsConstructor
+		• Generates no args constructor
+		• Will cause compiler error if there are final fields
+		• Can optionally force, which will initialize final fields with 0 / false / null
+	- @RequiredArgsContructor
+		• Generates a constructor for all fields that are final or marked @NonNull
+		• Constructor will throw a NullPointerException if any @NonNull fields are null
+	- @AllArgsConstructor
+		• Generates a constructor for all properties of class
+		• Any @NotNull properties will have null checks 
+	-  @Data
+		• Generates typical boilerplate code for POJOs
+		• Combines - @Getter, @Setter, @ToString, @EqualsAndHashCode, @RequiredArgsConstructor
+		• No constructor is generated if constructors have been explicitly declared
+	- @Value
+		• The immutable variant of @Data
+		• All fields are made private and final by default 
+	- @NonNull
+		• Set on parameter of method or constructor and a NullPointerException will be thrown if
+		parameter is null
+	- @Builder
+		• Implements the ‘builder’ pattern for object creation
+		• Person.builder().name("Adam Savage").city("San Francisco").job("Mythbusters").job("Unchained
+		Reaction”).build(); 
+	- @SneakyThrows
+		• Throw checked exceptions without declaring in calling method’s throws clause
+	- @Syncronized
+		• A safer implementation of Java’s synchronized
+	- @Getter(lazy = true) - for expensive getters
+		• Will calculate value first time and cache
+		• Additional gets will read from cache 
+	- @Log - Creates a Java util logger - Java util loggers are awful
+	- @Slf4j - Creates a SLF4J logger.
+		• Recommended - SLF4J is a generic logging facade
+		• Spring Boot’s default logger is LogBack
+	
+		
+		
+================= CIRLCE CI	=============
+	udemy guru 180.
+		
+		
+		
+==============HTTP =======================
+	-GET -> everything
+	-HEAD -> only headers
+	-POST -> create
+	-PUT -> create or update
+	-DELETE -> 
+	-TRACE -> will echo the received request to see if proxy is altering it
+	-OPTIONS -> ret. options from specific url
+	-CONNECT -> converts req. to tcp/ip tunnel, https trought an unecritped httpy proxy
+	-PATCH -> applies partial modifications to the specified resource
+	
+	METHOD Request Response  Safe Idempotent Cachable
+			Body    Body
+ 
+	GET 	No 		Yes 	Yes 	Yes 	  	Yes
+	HEAD 	No 		No 		Yes 	Yes 	  	Yes
+	POST 	Yes 	Yes 	No 		No 		  	Yes
+	PUT 	Yes 	Yes 	No 		Yes 	  	No
+	DELETE 	No 		Yes 	No 		Yes 		No
+	CONNECT Yes 	Yes 	No 		No 			No
+	OPTIONS Optional Yes 	Yes 	Yes 		No
+	TRACE 	No		 Yes 	Yes 	Yes 		No
+	PATCH 	Yes 	Yes 	No 		No 			Yes
+	
+	
+	ObjectMapper objectMapper = new ObjectMapper();
+	objectMapper.findAndRegisterModules(); //this one need to be there cuz config, and of O.M. and date time etc
+  
+  
+  
+  Spring 6 progress:  112

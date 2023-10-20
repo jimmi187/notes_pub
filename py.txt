@@ -1,0 +1,759 @@
+
+
+	install pyhton and pip3 globaly with sudo 
+	
+    ---ENV---
+        -
+            - pip3 install virtualenv    
+            - cd <where u wanna create new env>
+            - python -m venv env(or what ever u wanna call it )
+            - virtualenv -p /home/username/opt/python-3.10.1/bin/python3 venv 
+                                                    // with -p u selecet path of which py version u wanna use										
+                                                    "venv"-> name of env(u can name as ever u want)
+            - source venv/bin/activate   			//to activate it
+            - pip3 install --upgrade setuptools 
+                                                    //(usefull command not nessesry if "setuptools pip failed with error code 1` error")
+            - deactivate                 			// to exit from it or deactivate
+            - pip freeze > requirements.txt   		// save all pip installs for git
+            - pip install -r requirements.txt		// install all req from file
+
+
+    ---DOCKER--- > 
+        -
+            FROM python:3.9-slim-buster
+
+            COPY . /usr/src/downloadService    		# 1. Copy application code to a folder in container
+            WORKDIR /usr/src/downloadService   		# 2. Cd to the folder  
+            RUN pip install -r requirements.txt  	# 3. Tell pip to install all required packages
+
+            EXPOSE 5000								# 4. Execute app
+            WORKDIR /usr/src/downloadService/src
+            CMD ["python", "-i", "app.py"]
+
+
+
+    ----- builtinfuncitons -----
+        -
+            - sys.sizegetof()
+            - all
+            - any 
+            - sorted(dict, key= labda x: x['key'], reverse=True ) = returns a copy
+            - min(names, lambda x : len(x))
+            - max(dic, lambda x : x['key'])['key']    == for dic
+            - reversed
+            - len same as __len__ of obj
+            - abs
+            - sum(iterable)
+            - 
+	
+
+    ------ data structures -----
+        - list 
+            - append
+            - pop(index)
+            - insert(index, item)
+            - extend([])
+            - clear
+            - remove(value)
+            - index(value, after this index, till this) ret index
+            - count(value)
+            - reverse
+            - sort
+            - "".join(list)
+            - slices [::]
+            
+        - dictionares
+            - keys
+            - values
+            - items
+            - clear
+            - copy
+            - fromkeys(iterateble , value)
+            - get if is not dont error
+            
+        - tuples
+            - count(value)
+            - index(valee)
+            - slices [:]
+        
+        -sets
+            - add
+            - remove(value)
+            - discard(value) dont trow an error if its not present
+            - copy
+            - clear
+            - | union
+            - & intersection (presek)
+            - 
+        
+        -string 
+            -https://www.w3schools.com/python/python_ref_string.asp
+
+	------ OOP -----
+    
+		- simple Class!
+			
+            class User:
+                active_users = 0   - > claass atribute
+
+				@classmethod   --- > do not need instances
+				def display_active_users(cls):
+					return f"There are currently {cls.active_users} active users"
+
+				@classmethod -> custon contructor
+				def from_string(cls, data_str):     -----------> User.from_string(some string)
+					first,last,age = data_str.split(",")
+					return cls(first, last, int(age))
+                
+            
+                @age.setter
+                def age(self, value):
+                    self._age = value
+
+				def __init__(self, first, last, age):  -> contructor
+					self.first = first
+					self.last = last
+					self.age = age
+                    self._nesto = "hi" ----------------> > > private feald (just convecntion)
+                    self.__nestoDRugo="safdass" ------------->>>> makes this feald specialy to owner class it dont inherent - u._User__nestoDrugo
+					User.active_users += 1
+					
+				def __repr__(self):
+					return f"{self.first} is {self.age}" 
+                
+                @property
+                def age(self):   --------------------------> jane.age ---> u can change as u like name of property
+                    return self._age 
+                
+                @property
+                def full_name(self):                           --------------->> like this
+                    return "{} {}".format(self.name, self.last)
+				
+		
+            - ineheretance 
+                class Animal:
+                    def __init__(self, name, species):
+                        self.name = name
+                        self.species = species
+
+                    def __repr__(self):
+                        return f"{self.name} is a {self.species}"
+
+                    def make_sound(self, sound):
+                        print(f"this animal says {sound}")
+
+                class Cat(Animal):
+                    def __init__(self, name, breed, toy):    ----------------> blue = Cat("name" , "breed" , "toy")
+                        super().__init__(name, species="Cat") # Call init on parent class 
+                        self.breed = breed
+                        self.toy = toy
+
+                    def play(self):
+                        print(f"{self.name} plays with {self.toy}")
+                        
+                
+            - multyple ineheretance 
+                class Baza:
+                    def greet(self): pass
+
+                class Plivajuce(Baza):
+                    def __init__(self, name):
+                        self.name=name
+                    
+                    def swim(self):
+                        return "{} im swimming".format(self.name)
+                        
+                    def greet(self):
+                        super().greet()
+                        print("im {} of sea".format(self.name))
+                                    
+                class Zemljane(Baza):
+                    def __init__(self, name):
+                        self.name=name
+                    
+                    def walk(self):
+                        return "{} im walking".format(self.name)
+                        
+                    def greet(self):
+                        super().greet()
+                        print ("im {} of land".format(self.name))
+
+                class Penguin(Zemljane, Plivajuce):
+                    def __init__(self, name):   ----- > ako su metode istog imena korisit ih redom kojim su pozvane u zagrada
+                        super().__init__( name = name)    metoda help(cls) or cls.mro() or cls.__mro__
+                    
+                    def greet(self):    
+                        super().greet()      ----- sa ovim super je to da sve nasledi ali mora biti dajamant 
+                        #Plivajuce.greet(self)
+                    
+   
+                    
+        
+    ------- polymorfism --------
+        - overwiriting inhereted funcuions
+        - special methods or magic metods
+            - __methodname__
+            
+            from copy import copy
+            
+            class Human:
+                def __init__(self, first, last, age):
+                    self.first = first
+                    self.last = last
+                    self.age = age
+                    
+                def __repr__(self):
+                    return f"Human named {self.first} {self.last} aged {self.age}"
+
+                def __len__(self):
+                    return self.age
+
+                def __add__(self, other):        ---------------------------> this how u call it(k + j) => k == self and j == other  
+                    # When you add two humans together...you get a newborn baby Human!
+                    if isinstance(other, Human):
+                        return Human(first='Newborn', last=self.last, age=0)    ---- > new born 
+                    return "You can't add that!"
+
+                def __mul__(self, other):
+                    # When you multiply a Human by an int, you get clones of that Human!
+                    if isinstance(other, int):
+                        return [copy(self) for i in range(other)]   ----this how u call it (k * j) if u dont use copy it will make an one object iwth 3 references
+                    return "CANT MULTIPLY!"
+
+     
+     
+    ------ Iterators and Generators -------
+        
+        - Iterators
+            - iter() -> returns iteratir on wich u can call next
+                - first example
+                    def my_for(iterable, func):
+                        iterator = iter(iterable)
+                        while True:
+                            try:
+                                thing = next(iterator)
+                            except StopIteration:
+                                break
+                            else:
+                                func(thing)
+                            
+                    def square(x):
+                        print(x*x)
+
+                    my_for("lol", print)
+                    my_for([1,2,3,4,5], square)
+                - second example
+                    class Counter:
+                        def __init__(self, low, high):
+                            self.current = low
+                            self.high = high
+
+                        def __iter__(self):
+                            return self
+
+                        def __next__(self):
+                            if self.current < self.high:
+                                num = self.current
+                                self.current += 1
+                                return num
+                            raise StopIteration
+
+                    for x in Counter(50,70):
+                        print(x)
+                                        
+            
+              
+        - Generators
+            - are used for makeing iteratos and return generator obj on wich u can call next()
+                u can loop on it --- define a funcion insted of retrun YIELD
+            - yield
+            
+            
+    ------- Decorators ---------
+            from functools import wraps
+            - boler_plate
+                - passing a function 
+               
+                    def boler_plate(fn):
+                        @wraps(fn)
+                        def wrapper(*args, **kwargs):
+                            #DO sometuhing here
+                            return fn(*args, **kwargs)
+                        return wrapper
+                        
+                - passig argument to decorator
+                    def enusure_first_arg_is(val):
+                        def iner(fn):
+                            @wraps(fn):                                 =======> it gets call like  
+                            def wrapper(*args, **kwargs):                                           
+                                if args and args[0]!=val:
+                                    return "first arg needs to be a {}".format(val)
+                                return fn(*args, **kwargs)
+                            return wrapper
+                        return iner
+                        
+                    @enusure_first_arg_is("burito")
+                    def fav_food(*foods):
+                        print (foods)
+                    
+                    fav_food("burito", "kajamk")  ------> ret prints food
+                    fav_food("burito", "kajamk")  ------> ret first arg needs to be a burito"
+                        
+                
+            - exemple
+                - basik 
+                    from time import time
+
+                    def speed_test(fn):
+                        @wraps(fn)
+                        def wrapper(*args, **kwargs):
+                            start_time = time()
+                            result = fn(*args, **kwargs)
+                            end_time = time()
+                            print(f"Executing {fn.__name__}")
+                            print(f"Time Elapsed: {end_time - start_time}")
+                            return result
+                        return wrapper
+
+                    @speed_test
+                    def sum_nums_gen():
+                        return sum(x for x in range(90000000))
+
+                    @speed_test
+                    def sum_nums_list():
+                        return sum([x for x in range(90000000)])
+
+
+                    print(sum_nums_gen())
+                    print(sum_nums_list())
+                   
+                - with argumets
+                    def enforce(*types):
+                        def decorator(f):
+                            def new_func(*args, **kwargs):
+                                #convert args into something mutable   
+                                newargs = []        
+                                for (a, t) in zip(args, types):
+                                   newargs.append( t(a)) #feel free to have more elaborated convertion
+                                return f(*newargs, **kwargs)
+                            return new_func
+                        return decorator
+                        
+                        
+
+                    @enforce(str, int)
+                    def repeat_msg(msg, times):
+                        for time in range(times):
+                            print(msg)
+                        #repeat_msg("nesto", 6)
+                        #6th line (nesto , str) (6, int) 
+                        #7th line t(a) -> cast str(nesto) and cast int(6)
+                    @enforce(float, float)
+                    def divide(a,b):
+                        print(a/b)
+                        
+                        
+
+
+    -------- Testing --------
+        - usig assert can be escaped with running python3 -O filename.py
+        - doctests 
+            - exepts only sigle quotes
+            - exepts execly same value
+            - even a same order of keys in dict 
+            - example
+                def double(values):
+                    """ double the values in a list
+
+                    >>> double([1,2,3,4])
+                    [2, 4, 6, 8]
+
+                    >>> double([])
+                    []
+
+                    >>> double(['a', 'b', 'c'])
+                    ['aa', 'bb', 'cc']
+
+                    >>> double([True, None])
+                    Traceback (most recent call last):
+                        ...
+                    TypeError: unsupported operand type(s) for *: 'int' and 'NoneType'
+                    """
+                    return [2 * element for element in values]
+                
+        - unittest
+            - basic example
+                import unittest
+                from random import choice
+
+
+                def eat(food, is_healthy):
+                    if not isinstance(is_healthy, bool):
+                        raise ValueError("is_healthy must be a boolean")
+                    ending = "because YOLO!"
+                    if is_healthy:
+                        ending = "because my body is a temple"
+                    return f"I'm eating {food}, {ending}"
+
+
+                def nap(num_hours):
+                    if num_hours >= 2:
+                        return f"Ugh I overslept.  I didn't mean to nap for {num_hours} hours!"
+                    return f"I'm feeling refreshed after my {num_hours} hour nap"
+
+
+                def is_funny(person):
+                    if person == 'tim':
+                        return False
+                    return True
+
+
+                def laugh():
+                    return choice(('lol', 'haha', 'tehehe'))
+
+
+                class ActivityTests(unittest.TestCase):
+                    def test_eat_healthy(self):
+                        """eat should have a positive message for healthy eating"""
+                        self.assertEqual(
+                        eat("broccoli", is_healthy=True),
+                        "I'm eating broccoli, because my body is a temple"
+                        )
+                    def test_eat_unhealthy(self):
+                        """eat should indicate you've given up for eating unhealthy"""
+                        self.assertEqual(
+                        eat("pizza", is_healthy=False),
+                        "I'm eating pizza, because YOLO!"
+                        )
+                    def test_eat_healthy_boolean(self):
+                        """is_healthy must be a bool"""
+                        with self.assertRaises(ValueError):
+                            eat("pizza", is_healthy="who cares?")
+
+                    def test_short_nap(self):
+                        """short naps should be refreshing"""
+                        self.assertEqual(
+                        nap(1),
+                        "I'm feeling refreshed after my 1 hour nap"
+                        )
+                    def test_long_nap(self):
+                        """long naps should be discouraging"""
+                        self.assertEqual(
+                        nap(3), "Ugh I overslept.  I didn't mean to nap for 3 hours!"
+                        )
+                    def test_is_funny_tim(self):
+                        self.assertEqual(is_funny("tim"), False)
+                        # self.assertFalse(is_funny("tim"), "tim should not be funny")
+
+                    def test_is_funny_anyone_else(self):
+                        """anyone else but tim should be funny"""
+                        self.assertTrue(is_funny("blue"), "blue should be funny")
+                        self.assertTrue(is_funny("tammy"), "tammy should be funny")
+                        self.assertTrue(is_funny("sven"), "sven should be funny")
+
+                    def test_laugh(self):
+                        """laugh returns a laughing string"""
+                        self.assertIn(laugh(), ('lol', 'haha', 'tehehe'))
+
+                if __name__ == "__main__":
+                    unittest.main()
+                    
+               
+            - before and after hooks
+                - class
+                    class Robot:
+                        def __init__(self, name, battery=100, skills=[]):
+                            self.name = name
+                            self.battery = battery
+                            self.skills = skills
+
+                        def charge(self):
+                            self.battery = 100
+                            return self
+
+                        def say_name(self):
+                            if self.battery > 0:
+                                self.battery -= 1
+                                return f"BEEP BOOP BEEP BOOP.  I AM {self.name.upper()}"
+                            return "Low power.  Please charge and try again"
+
+                        def learn_skill(self, new_skill, cost_to_learn):
+                            if self.battery >= cost_to_learn:
+                                self.battery -= cost_to_learn
+                                self.skills.append(new_skill)
+                                return f"WOAH. I KNOW {new_skill.upper()}"
+                            return "Insufficient battery. Please charge and try again"
+                - test
+                    import unittest
+                    from robot import Robot
+
+
+                    class RobotTests(unittest.TestCase):
+                        def setUp(self):
+                            self.mega_man = Robot("Mega Man", battery=50)
+
+                        def test_charge(self):
+                            self.mega_man.charge()
+                            self.assertEqual(self.mega_man.battery, 100)
+
+                        def test_say_name(self):
+                            self.assertEqual(
+                                self.mega_man.say_name(),
+                                "BEEP BOOP BEEP BOOP.  I AM MEGA MAN")
+                            self.assertEqual(self.mega_man.battery, 49)
+
+
+                    if __name__ == "__main__":
+                        unittest.main()
+
+                    
+                
+    --------- File I/O ----------
+        -txt basic
+            - file = open("some.txt")   ----------------->>>> cool way =>
+                - file.read() - whole thing to the end                     
+                - file.seek(n) = returns cursor to n position               
+                - file.readline() - read one line 
+                - file.readlines() - returns list of lines
+                - file.close() - frees resources
+                - file.closed - is file closed returns T/F 
+            - with open("story.txt") as file:
+                - #here u can do ur stuff w/ file.read ect
+                - #and at the end it closes it self 
+                - file.__enter__() --- > interface 4 with
+                - file.__exit__() ----- > interface 4 with
+                - so u can make your it in your own calsses
+                
+            - modes 
+                -r -> read only
+                -r+ -> read, write from where cursor is and overwrites after
+                -w -> write from begining and overwrites contetn also makes file if dont exist
+                -a -> only write at the end of file  also makes file if dont exist
+                
+        - csv
+            - reader
+                - from csv import reader returns iterable list of lists accessible by []
+                - example
+                    -read
+                        from csv import reader
+                        with open("fighters.csv") as file:
+                            csv_reader = reader(file)
+                            next(csv_reader) #To skip the headers
+                            for fighter in csv_reader:
+                                # Each row is a list
+                                # Use index to access data
+                                print(f"{fighter[0]} is from {fighter[1]}") 
+
+                        # Example where data is cast into a list
+                        from csv import reader
+                        with open("fighters.csv") as file:
+                            csv_reader = reader(file)
+                            data = list(csv_reader)
+                            print(data)
+                    -write
+                        
+                        from csv import reader, writer
+                        # using nested with statements
+                        with open('fighters.csv') as file:
+                            csv_reader = reader(file) #data never converted to list
+                            with open('screaming_fighters.csv', "w") as file:
+                                csv_writer = writer(file)
+                                for fighter in csv_reader:
+                                    csv_writer.writerow([s.upper() for s in fighter])
+                        
+                        # Other approach, with only 1 file open at a time
+                        with open('fighters.csv') as file:
+                            csv_reader = reader(file)
+                            # data converted to list and saved to variable
+                            fighters = [[s.upper() for s in row] for row in csv_reader]
+
+                        with open('screaming_fighters.csv', "w") as file:
+                            csv_writer = writer(file)   ---------> here u can add custom delimiter="|" deafault is ","
+                            for fighter in fighters:
+                                csv_writer.writerow(fighter)
+                                                
+                        
+            - DictReader
+                - from csv import DictRead so easy 
+                - example  
+                    -reader
+                        from csv import DictReader
+                        with open("fighters.csv") as file:
+                            csv_reader = DictReader(file)
+                            for row in csv_reader:
+                                # Each row is an OrderedDict!
+                                print(row['Name']) #Use keys to access data
+                                
+                    -writer
+                        -first
+                            from csv import writer, DictWriter
+                            with open("cats.csv", "w") as file:
+                            headers = ["Name", "Breed", "Age"]
+                            csv_writer = DictWriter(file, fieldnames=headers)
+                            csv_writer.writeheader()
+                            csv_writer.writerow({
+                                "Name": "Garfield",
+                                "Breed": "Orange Tabby",
+                                "Age": 10
+                            })
+                        
+                        #other examle
+                        -second
+                            from csv import DictReader, DictWriter
+
+                            def cm_to_in(cm):
+                                return float(cm) * 0.393701
+
+                            with open("fighters.csv") as file:
+                                csv_reader = DictReader(file)
+                                fighters = list(csv_reader)
+
+                            with open("inches_fighters.csv", "w") as file:
+                                headers = ("Name","Country","Height")
+                                csv_writer = DictWriter(file, fieldnames=headers)
+                                csv_writer.writeheader()
+                                for f in fighters:
+                                    csv_writer.writerow({
+                                        "Name": f["Name"],
+                                        "Country": f["Country"],
+                                        "Height": cm_to_in(f["Height (in cm)"])
+                                    })
+
+        - pickle Rick
+            - 
+        - json ---> import json
+            - json.dumps(cls.__dict__)
+            - 
+        - jsonpickle ----> python3 -m install jsonpickle
+            - encode
+            - decode
+                
+             
+             
+
+    -------Regex-------
+        - email => (^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)
+        - nutshell
+            - pythex ===> site for py regex
+            - basic
+                - \d => digit 0-9
+                - \w => letter digit or underscore
+                - \s => whitespave character
+                - \D => non digit
+                - \W => non word character 
+                - \S => non whitespace character
+                - .  => any character extept line break 
+            - quantifers
+                - +   => one of more
+                - {3} => exacly x times -> {3} - 3 times
+                - {3,5} => 3 or 5 times
+                - {4,} => four or more times
+                - * zero or more times
+                - ? once or non(oprional)
+            - classes
+                - [a-zA-Z0-9] => group of aceptible values
+                - [^] => inside it means not
+            - pocetak kraj
+                - ^ => start of string or line 
+                - $ => end of string or line 
+                - \b => word boundary -> \bw+\b select just words 
+            - logial or and capture group
+                - | => or
+                - () => use for groups -> so u can return more things everything in paretntenses
+        - import re
+            - pattern = re.compile(r'\d{3} \d{3}-\d{3}')
+            - pattern.search => returns first mach as obj
+            - pattern.fullmatch() => ...
+            - pattern.search.groups() -> retrunrs all actual matches
+            - pattern.search.group() -> retrunrs actual matches
+                - example  
+            - pattern.findall -> returns a list of maches as string
+                    -   url_regex = re.compile(r'(https?)://(www\.[A-za-z-]{2,256}\.[a-z]{2,6})([-a-zA-Z0-9@:%_\+.~#?&//=]*)')
+                        match = url_regex.search("https://www.my-website.com/bio?data=blah&dog=yes")
+                        print(f"Protocol: {match.group(1)}")
+                        print(f"Domain: {match.group(2)}")
+                        print(f"Everything Else: {match.group(3)}")
+            - https://docs.python.org/3/library/re.html#functions
+            - simbolic group names
+                - example 
+                    - def parse_name(input):
+                        name_regex = re.compile(r'^(Mr\.|Mrs\.|Ms\.|Mdme\.) (?P<first>[A-Za-z]+) (?P<last>[A-Za-z]+)$')
+                        matches = name_regex.search(input)
+                        print(matches.group())
+                        print(matches.group('first'))
+                        print(matches.group('last'))
+            - compilation flags
+                - verbose 
+                - ignorecase
+                - 4 more docs
+                - example
+                    - pattern = re.compile(r"""
+                                            ^([a-z0-9_\.-]+)	#first part of email	
+                                            @					#single @ sign
+                                            ([0-9a-z\.-]+)		#email provider
+                                            \.					#single period
+                                            ([a-z\.]{2,6})$		#com, org, net, etc.
+                                        """, re.X | re.I)
+            - sub method ==> same as str.replace
+                -example
+                    -   pattern = re.compile(r'(Mr.|Mrs.|Ms.) ([a-z])[a-z]+', re.I)
+                        result = pattern.sub("\g<1> \g<2>", text)
+                    -   titles = ["Significant Others (1987)", ...]
+                        titles.sort()
+                        fixed_titles = []
+                        pattern = re.compile(r'(?P<title>^[\w ]+) \((?P<date>\d{4})\)')
+                        for book in titles:
+                            # result = pattern.sub("\g<2> - \g<1>", book)
+                            result = pattern.sub("\g<date> - \g<title>", book)
+                            fixed_titles.append(result)
+                        fixed_titles.sort()
+                     
+                     
+    ------ SQL ---------
+        -SQLite3
+            - win install -> https://www.youtube.com/watch?v=w7-oOIRIhiQ
+                -2 zip files binaries and commandline tools
+                -extract all files(not folder) to C:\sqlite
+                - CMD -> set PATH=%PATH%;C:\sqlite;
+            - sqlite3 -> to enter
+            - .quit -> to exit
+            - sqlite3 foo_db.db -> create table dogs ... -> first way of makeing db persistant
+            - sqlite3 -> .open foo_db.db -> create table dogs  -> second way of makeing db persistant
+            - select -> https://sqlite.org/lang_select.html
+            - insert -> 
+                - 
+                    people = [
+                        ("Roald","Amundsen", 5),
+                        ("Rosa", "Parks", 8),
+                        ("Henry", "Hudson", 7),
+                        ("Neil","Armstrong", 7),
+                        ("Daniel", "Boone", 3)]
+
+                    # for person in people:
+                    # 	insert that one person
+                    average = 0
+                    for person in people:
+                        c.execute("INSERT INTO friends VALUES (?,?,?)", person)
+                        average += person[2]
+                    print(average/len(people))
+
+                        # Insert all at once
+                        # c.executemany("INSERT INTO friends VALUES (?,?,?)", people)
+            - select examle -> 
+                - # c.execute("SELECT * FROM friends WHERE first_name IS 'Rosa'")
+                    c.execute("SELECT * FROM friends WHERE closeness > 5 ORDER BY closeness")
+
+
+                    # Iterate over cursor
+                    # for result in c:
+                    # 	print(result)
+
+                    # Fetch One Result
+                    # print(c.fetchone())
+
+                    # Fetch all results as list
+                    print(c.fetchall())
+            - SQL INJECTION
+                -
+
+                    

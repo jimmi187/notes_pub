@@ -1,0 +1,151 @@
+SYSTEM DESIGN
+
+D:\arhi\SystemDesignMaterTemlate.jfif
+
+Here is a brief introduction of some of the components involved:
+
+	𝗔𝗣𝗜 𝗚𝗮𝘁𝗲𝘄𝗮𝘆
+	An API Gateway (AG) is a server that acts as a single point of entry for a set of #microservices. AG receives client requests, forwards them to the appropriate microservice, and then returns the server's response to the client. AG is responsible for tasks such as routing, authentication, and rate limiting.
+
+	An API Gateway is a server that acts as an intermediary between an application and a set of #microservices. It is responsible for request routing, composition, and protocol translation, among other things. The #apigateway is the entry point for client requests to access the backend services, and it also performs tasks such as authentication, rate limiting, and caching.
+
+	𝗖𝗗𝗡
+	A Content Delivery Network (CDN) is a distributed network of servers that are deployed in multiple locations around the world. These servers are designed to deliver web content, such as images, videos, and other static files, to users based on their geographical location. The main purpose of a #cdn is to improve the performance and availability of web content by caching it on servers that are closer to the users who are requesting it.
+
+	A #cdn is a globally distributed network of servers that cache and serve content from multiple locations, reducing latency and improving the availability of content for users. CDNs are commonly used to distribute large files such as images, videos, and software downloads, as well as to provide protection against DDoS attacks and other security threats.
+	
+	𝗗𝗮𝘁𝗮 𝗣𝗮𝗿𝘁𝗶𝘁𝗶𝗼𝗻𝗶𝗻𝗴
+	In a database, 𝗵𝗼𝗿𝗶𝘇𝗼𝗻𝘁𝗮𝗹 𝗽𝗮𝗿𝘁𝗶𝘁𝗶𝗼𝗻𝗶𝗻𝗴, also known as sharding, involves dividing the rows of a table into smaller tables and storing them on different servers or database instances. This is done to distribute the load of a database across multiple servers and to improve performance.
+
+	On the other hand, 𝘃𝗲𝗿𝘁𝗶𝗰𝗮𝗹 𝗽𝗮𝗿𝘁𝗶𝘁𝗶𝗼𝗻𝗶𝗻𝗴 involves dividing the columns of a table into separate tables. This is done to reduce the number of columns in a table and to improve the performance of queries that only access a small number of columns.
+
+	Data partitioning is a process of dividing a large data set into smaller, more manageable pieces called partitions. The goal of data partitioning is to improve the performance and scalability of a system by distributing the data across multiple servers. Data partitioning can be performed based on various criteria, such as data access patterns, data size, and data distribution. Common techniques for data partitioning include range partitioning, hash partitioning, and consistent hashing.
+
+	𝗗𝗶𝘀𝘁𝗿𝗶𝗯𝘂𝘁𝗲𝗱 𝗺𝗲𝘀𝘀𝗮𝗴𝗶𝗻𝗴 𝘀𝘆𝘀𝘁𝗲𝗺𝘀 
+	These are used to send messages between distributed components of a system. Examples include Apache #kafka and #rabbitmq.
+
+	𝗟𝗼𝗮𝗱 𝗕𝗮𝗹𝗮𝗻𝗰𝗲𝗿: A #loadbbalancer is a device or service that distributes incoming traffic across multiple servers to ensure that no single server becomes a bottleneck. Load balancers help to improve the availability, reliability, and scalability of a system by distributing the workload across multiple servers. Load balancing can be performed based on various algorithms, such as round-robin, least connections, and IP hash.
+
+	𝗗𝗶𝘀𝘁𝗿𝗶𝗯𝘂𝘁𝗲𝗱 𝗳𝗶𝗹𝗲 𝘀𝘆𝘀𝘁𝗲𝗺𝘀
+	These are file systems that are designed to store and manage files across a group of servers.
+
+
+	𝗡𝗼𝘁𝗶𝗳𝗶𝗰𝗮𝘁𝗶𝗼𝗻𝘀 𝘀𝘆𝘀𝘁𝗲𝗺
+	These are used to send notifications or alerts to users, such as emails, push notifications, or text messages.
+
+
+	𝗙𝘂𝗹𝗹-𝘁𝗲𝘅𝘁 𝘀𝗲𝗮𝗿𝗰𝗵
+	Full-text search enables users to search for specific words or phrases within an app or website. When a user queries, the app or website returns the most relevant results. To do this quickly and efficiently, full-text search relies on an inverted index, which is a data structure that maps words or phrases to the documents in which they appear.
+
+	This enables users to search for specific words or phrases within an app or website and returns the most relevant results. It relies on an inverted index, which maps words to the documents they appear in.
+
+=========API==========
+--D:\arhi\API.jfif
+
+	An API Gateway (AG) is a server that acts as a single point of entry for a set of #microservices.
+
+	AG receives client requests, forwards them to the appropriate microservice, and then returns the server's response to the client.
+
+	AG is responsible for tasks such as routing, authentication, and rate limiting. This enables microservices to focus on their individual tasks and improves the overall performance and scalability of the system.
+
+	Here are the top AG uses:
+
+	𝗥𝗼𝘂𝘁𝗶𝗻𝗴: The AG receives requests from clients and routes them to the appropriate microservice. This enables clients to access the various microservices through a single entry point, simplifying the overall system design.
+
+	𝗦𝗲𝗰𝘂𝗿𝗶𝘁𝘆: The AG can be used to authenticate clients and enforce access control policies for the microservices. This helps to ensure that only authorized clients can access the microservices and helps to prevent unauthorized access.
+
+	𝐓𝐫𝐚𝐧𝐬𝐟𝐨𝐫𝐦𝗶𝗻𝗴 𝐫𝐞𝐪𝐮𝐞𝐬𝐭𝐬 𝐚𝐧𝐝 𝐫𝐞𝐬𝐩𝐨𝐧𝐬𝐞𝐬: AG can transform incoming requests and outgoing responses to and from the backend to meet the needs of different clients or to comply with different backend architectures.
+
+	𝗥𝗮𝘁𝗲 𝗹𝗶𝗺𝗶𝘁𝗶𝗻𝗴: You can rate limit client access to microservices with an AG. This can help prevent denial of service attacks and other types of malicious behavior.
+
+	𝗟𝗼𝗮𝗱 𝗯𝗮𝗹𝗮𝗻𝗰𝗶𝗻𝗴: The AG can distribute incoming requests among multiple instances of a microservice, enabling the system to handle a larger number of requests and improving its overall performance and scalability.
+
+	𝗖𝗮𝗰𝗵𝗶𝗻𝗴: The AG can cache responses from the microservices, reducing the number of requests that need to be forwarded to the microservices and improving the overall performance of the system.
+
+	𝗦𝗲𝗿𝘃𝗲𝗿𝗹𝗲𝘀𝘀 𝗲𝘅𝗲𝗰𝘂𝘁𝗶𝗼𝗻: AG can integrate with other services, such as AWS Lambda, to enable serverless architectures and enable complex processing of requests without requiring a dedicated server.
+
+	𝗖𝗶𝗿𝗰𝘂𝗶𝘁 𝗯𝗿𝗲𝗮𝗸𝗲𝗿: AG can be used to implement circuit breaker patterns, which can help to protect against cascading failures and improve the resilience of your system.
+
+	𝗥𝗲𝘃𝗲𝗿𝘀𝗲 𝗽𝗿𝗼𝘅𝘆: AG can act as a reverse proxy, routing incoming requests to the appropriate backend service based on the request path or other criteria.
+
+	𝗔𝗣𝗜 𝘃𝗲𝗿𝘀𝗶𝗼𝗻𝗶𝗻𝗴: AG can be used to implement API versioning, allowing you to maintain multiple versions of an API and manage the transition from one version to another.
+
+
+
+===============================
+
+
+𝗦𝘆𝘀𝘁𝗲𝗺 𝗗𝗲𝘀𝗶𝗴𝗻 𝗕𝗮𝘀𝗶𝗰𝘀: 𝗙𝗼𝗿𝘄𝗮𝗿𝗱 𝗣𝗿𝗼𝘅𝘆 𝘃𝘀. 𝗥𝗲𝘃𝗲𝗿𝘀𝗲 𝗣𝗿𝗼𝘅𝘆
+
+Forward Proxy
+---------------
+A forward proxy, also known as a "proxy server," or simply "proxy," is a server that sits in front of one or more client machines and acts as an intermediary between the clients and the internet. When a client machine makes a request to a resource on the internet, the request is first sent to the forward proxy. The forward proxy then forwards the request to the internet on behalf of the client machine and returns the response to the client machine.
+
+A forwards proxy is mostly used for:
+1. Client Anonymity
+2. Caching
+3. Traffic Control
+4. Logging
+5. Request/Response Transformation
+6. Encryption
+
+Reverse Proxy
+---------------
+A reverse proxy is a server that sits in front of one or more web servers and acts as an intermediary between the web servers and the Internet. When a client makes a request to a resource on the internet, the request is first sent to the reverse proxy. The reverse proxy then forwards the request to one of the web servers, which returns the response to the reverse proxy. The reverse proxy then returns the response to the client.
+
+A reverse proxy is mostly used for:
+1. Server Anonymity
+2. Caching
+3. Load Balancing
+4. DDoS Protection
+5. Canary Experimentation
+6. URL/Content Rewriting
+
+
+Ref:
+1) Grokking the System Design Interview: https://lnkd.in/giwyzfkT
+2) Grokking the Advanced System Design Interview:  https://lnkd.in/grPz6meZ
+3) System Design Interview Survival Guide (2023):
+https://lnkd.in/deqz6gnz
+
+📌 Recommend Design Gurus' Coding & System Design courses and earn 20% on each referral: https://lnkd.in/gz4rqr5k
+
+
+
+𝗥𝗲𝗰𝗿𝘂𝗶𝘁𝗲𝗿 𝗣𝗿𝗲-𝘀𝗰𝗿𝗲𝗲𝗻 (20-30 mins) – Non-technical. Chat about your resume and background. Get ready to answer questions like Why #google? What's your biggest achievement? Why are you leaving your current job?
+
+𝗧𝗲𝗰𝗵𝗻𝗶𝗰𝗮𝗹 𝗣𝗵𝗼𝗻𝗲 𝗦𝗰𝗿𝗲𝗲𝗻𝘀 (40-60 mins) – One or two phone screens with the hiring manager or a Google employee. You'll solve a coding question related to #datastructures and #algorithms on a shared Google Doc. Some questions on your background.
+
+𝗢𝗻𝘀𝗶𝘁𝗲 𝗟𝗼𝗼𝗽 (4-5 interviews) – #coding and #systemdesign questions. Expect questions related to slightly harder data structure, algorithms, and system design.
+
+Google evaluates candidates on 4 criteria:
+
+
+
+* Data Structures - Practice Heaps, HashTable, Tree, Stack, Queue, Graph, and Trie. 
+* Algorithm - Practice Dynamic Programming, Quick-Sort, Breadth-first and Depth-first search.
+* Explain your thought process - Practice describing your design decisions clearly and concisely.
+* Collaborate – Don't forget to discuss tradeoffs, present multiple solutions, and take hints from the interviewer.
+
+
+Happy Number (easy)
+Minimum Meeting Rooms (medium)
+Number of Islands (medium)
+Merge Intervals (medium)
+Number of Closed Islands (medium)
+Making a Large Island (hard)
+Employee Free Time (hard)
+Alien Dictionary (hard)
+
+
+Design Web Crawler,
+Design Google Docs
+Design Facebook #messenger
+Design YouTube
+Design Twitter/Facebook message search
+
+
+𝗥𝗲𝗳:
+1) Grokking the Coding Interview: https://lnkd.in/g6ApdjVW
+2) Grokking System Design Fundamentals: https://lnkd.in/gtcCT-dJ
+3) Grokking the System Design Interview: https://lnkd.in/giwyzfkT

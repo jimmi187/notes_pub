@@ -1,0 +1,35 @@
+nginx
+
+
+
+server {
+    listen 80;
+    server_name somedomainnameapp1.com;
+
+    location / {
+        proxy_pass http://127.0.0.1:8088;  # Forward requests to the first app running on port 8088
+    }
+}
+
+
+sudo ln -s /etc/nginx/sites-available/somedomainnameapp1.com /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/somedomainnameapp2.com /etc/nginx/sites-enabled/
+s
+
+
+sudo nginx -t
+
+
+sudo systemctl restart nginx
+
+
+
+	$$L
+
+apt install python3-certbot-nginx
+
+certbot --register-unsafely-without-email
+
+crontab -e
+
+0 0 1 * * certbot --nginx renew ====> to the end of file 
